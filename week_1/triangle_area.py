@@ -1,7 +1,49 @@
 from os import system
 
+def accept_posi_num(variable):
+    """Ensures to receive a positive number from user
+
+    Args:
+    variable (str): Varibale name to print
+
+    Returns:
+    float: Positive number from user
+    """
+    while True:
+
+        try:
+            positive_number = float(input(f'Enter the {variable} of the triangle: '))
+
+            if positive_number == 0:
+                raise Exception(f'THE {variable.upper()} OF A TRIANGLE CAN NOT BE ZERO!')
+            elif positive_number < 0:
+                raise Exception(f'THE {variable.upper()} OF A TRIANGLE CAN NOT BE NEGATIVE!')
+
+            break
+            
+        except ValueError as ve:
+            system('clear')
+            print('ENTER A NUMBER PLEASE!')
+        
+        except Exception as e:
+            system('clear')
+            print(e)
+
+    return positive_number
+
+
 def triangle_area(base_t, height_t):
+    """Gets the area of a triangle
+
+    Args:
+    base_t (float): Triangle Base Positive float
+    base_t (float): Triangle Height Positive float
+
+    Returns:
+    float: Triangle area
+    """
     return (base_t * height_t)/2
+
 
 def main():
 
@@ -10,52 +52,17 @@ def main():
     system('clear')
 
     # Ask for the base of the triangle avoiding errors
-    while True:
-
-        try:
-            base = int(input('Enter the base of the triangle: '))
-
-            if base == 0:
-                raise Exception('THE BASE OF A TRIANGLE CAN NOT BE ZERO!')
-            elif base < 0:
-                raise Exception('THE BASE OF A TRIANGLE CAN NOT BE NEGATIVE!')
-
-            break
-            
-        except ValueError as ve:
-            system('clear')
-            print('ENTER A NUMBER PLEASE!')
-        
-        except Exception as e:
-            system('clear')
-            print(e)
+    base = accept_posi_num('base')
 
     system('clear')
+
+    print(f'Base: {base}')
 
     # Ask for the height of the triangle avoiding errors
-    while True:
+    height = accept_posi_num('height')
 
-        print(f'Base: {base}')
+    system('clear') 
 
-        try:
-            height = int(input('Enter the height of the triangle: '))
-
-            if height == 0:
-                raise Exception('THE HEIGHT OF A TRIANGLE CAN NOT BE ZERO!')
-            elif height < 0:
-                raise Exception('THE HEIGHT OF A TRIANGLE CAN NOT BE NEGATIVE!')
-
-            break
-            
-        except ValueError as ve:
-            system('clear')
-            print('ENTER A NUMBER PLEASE!')
-        
-        except Exception as e:
-            system('clear')
-            print(e)
-
-    system('clear')
     print(f'Base: {base}')
     print(f'Height: {height}')
 
