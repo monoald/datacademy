@@ -45,6 +45,23 @@ def triangle_area(base_t, height_t):
     return (base_t * height_t)/2
 
 
+def triangle_type(side_a, side_b, base):
+    """Identify the type of a triangle
+
+    Args:
+    side_a (float): Triangle Side Positive float
+    side_b (float): Triangle Side Positive float
+    """
+    if side_a == side_b and side_a == base:
+        triangle = 'Equilateral'
+    elif side_a == side_b and side_a != base:
+        triangle = 'Isosceles'
+    else:
+        triangle = 'Scalene'
+
+    print(f'The triangle is {triangle}')
+
+
 def main():
 
     # Welcome message
@@ -55,8 +72,6 @@ def main():
     base = accept_posi_num('base')
 
     system('clear')
-
-    print(f'Base: {base}')
 
     # Ask for the height of the triangle avoiding errors
     height = accept_posi_num('height')
@@ -70,6 +85,33 @@ def main():
     area = triangle_area(base, height)
 
     print(f'The area of your triangle is: {area}')
+
+    # Ask the user to know the triangle type
+    print('\nYou wan\'t to know the type of the triangle?')
+    print('     1. YES      2. NO')
+
+    while True:
+        try:
+            option = input('')
+            
+            if option == '1' or option == '2':
+                break
+            
+            raise Exception('ENTER A VALID OPTION!')
+        except Exception as e:
+            print(e)
+
+    system('clear')
+
+    if option == '1':
+        a_side = accept_posi_num('first side') 
+
+        b_side = accept_posi_num('second side') 
+
+        triangle_type(a_side, b_side, base)
+    
+    print('Thanks to use our program!')
+
 
 
 if __name__ == '__main__':
