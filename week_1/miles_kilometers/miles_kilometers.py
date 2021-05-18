@@ -24,16 +24,45 @@ def validate_option(message):
     return int(option)
 
 
-def convertion_miles(length, convertion_longitude):
-    """Convert from miles.
+def miles_to_others(length, convertion_longitude):
+    """Convert from miles to other longitude.
 
     Args:
-    word (str): Word to operate
+    length (float): Length you want to convert
+    convertion_logitud (dict): Dict of the desired longitud
 
     Returns:
-    str: Word without accent marks
+    float: Length in other longitude
     """
     return length * convertion_longitude['length']
+
+
+def others_to_miles(length, convertion_longitude):
+    """Convert from other longitude to miles.
+
+    Args:
+    length (float): Length you want to convert
+    convertion_logitud (dict): Dict of the desired longitud
+
+    Returns:
+    float: Length in other longitude
+    """
+    return length / convertion_longitude['length']
+
+
+def others_to_others(length, actual_longitude, convertion_longitude):
+    """Convert from other longitude to other longitud.
+
+    Args:
+    length (float): Length you want to convert
+    convertion_logitud (dict): Dict of the desired longitud
+
+    Returns:
+    float: Length in other longitude
+    """
+    convertion_number = convertion_longitude['length'] / actual_longitude['length']
+
+    return convertion_number * length
 
 
 def main():
@@ -78,10 +107,19 @@ def main():
     """
     longitude_convertion = validate_option(lconverter_message)
 
+    #print(longitude_miles[longitude_convertion])
+
     # Convertion Logic
-    if actual_length == 1:
-        my_length = convertion_miles(actual_length, longitude_miles[longitude_convertion])
-        print(my_length)
+    if actual_longitude == 1:
+        length_converted = miles_to_others(actual_length, longitude_miles[longitude_convertion])
+    elif longitude_convertion == 1:
+        length_converted = others_to_miles(actual_length, longitude_miles[actual_longitude])
+    elif actual_length != 1 and longitude_convertion != 1:
+        length_converted = others_to_others(actual_length, longitude_miles[actual_longitude], longitude_miles[longitude_convertion])
+
+    # Print final convertion
+    system('clear')
+    print(f"{actual_length} {longitude_miles[actual_longitude]['longitude']} are {round(length_converted, 2)} {longitude_miles[longitude_convertion]['longitude']}")
 
 
 if __name__ == '__main__':
